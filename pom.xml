@@ -9,12 +9,12 @@
 
     <groupId>org.osmdroid</groupId>
     <artifactId>osmdroid-parent</artifactId>
-    <version>4.1</version>
+    <version>4.2</version>
     <packaging>pom</packaging>
 
     <name>OSMdroid parent</name>
     <description>An Android library to display OpenStreetMap views.</description>
-    <url>http://code.google.com/p/osmdroid</url>
+    <url>https://github.com/osmdroid/osmdroid</url>
 
     <licenses>
         <license>
@@ -25,14 +25,14 @@
     </licenses>
 
     <scm>
-        <url>http://osmdroid.googlecode.com/svn/tags/osmdroid-parent-4.1</url>
-        <connection>scm:svn:http://osmdroid.googlecode.com/svn/tags/osmdroid-parent-4.1</connection>
-        <developerConnection>scm:svn:https://osmdroid.googlecode.com/svn/tags/osmdroid-parent-4.1</developerConnection>
+        <connection>scm:git:git@github.com:osmdroid/osmdroid.git</connection>
+        <url>scm:git:git@github.com:osmdroid/osmdroid.git</url>
+        <developerConnection>scm:git:git@github.com:osmdroid/osmdroid.git</developerConnection>
     </scm>
 
     <issueManagement>
-        <system>Google Project</system>
-        <url>http://code.google.com/p/osmdroid/issues/list</url>
+        <system>GitHub Issues</system>
+        <url>https://github.com/osmdroid/osmdroid/issues</url>
     </issueManagement>
 
     <developers>
@@ -56,39 +56,33 @@
         <dependencies>
             <!-- Android included libraries -->
             <dependency>
-                <groupId>com.google.android</groupId>
+                <groupId>android</groupId>
                 <artifactId>android</artifactId>
-                <version>4.1.1.4</version>
+                <version>4.3_r2</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>android-test</artifactId>
-                <version>4.1.1.4</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>support-v4</artifactId>
-                <version>r7</version>
+                <groupId>android.support</groupId>
+                <artifactId>compatibility-v4</artifactId>
+                <version>19.1.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.android.maps</groupId>
                 <artifactId>maps</artifactId>
-                <version>16_r3</version>
+                <version>18_r3</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.google.android.gms</groupId>
                 <artifactId>google-play-services</artifactId>
                 <type>apklib</type>
-                <version>10</version>
+                <version>16.0.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.android.gms</groupId>
                 <artifactId>google-play-services</artifactId>
                 <type>jar</type>
-                <version>10</version>
+                <version>16.0.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-logging</groupId>

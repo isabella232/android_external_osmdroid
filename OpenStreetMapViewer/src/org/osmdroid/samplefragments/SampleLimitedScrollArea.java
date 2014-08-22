@@ -2,14 +2,16 @@
 package org.osmdroid.samplefragments;
 
 import org.osmdroid.util.BoundingBoxE6;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.MapView.Projection;
-import org.osmdroid.views.overlay.SafeDrawOverlay;
-import org.osmdroid.views.safecanvas.ISafeCanvas;
-import org.osmdroid.views.safecanvas.SafePaint;
+import org.osmdroid.views.Projection;
+import org.osmdroid.views.overlay.Overlay;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,7 +34,7 @@ public class SampleLimitedScrollArea extends BaseSampleFragment {
 	private static final int MENU_LIMIT_SCROLLING_ID = Menu.FIRST;
 
 	private static final BoundingBoxE6 sCentralParkBoundingBox;
-	private static final SafePaint sPaint;
+	private static final Paint sPaint;
 
 	// ===========================================================
 	// Fields
@@ -43,7 +45,7 @@ public class SampleLimitedScrollArea extends BaseSampleFragment {
 	static {
 		sCentralParkBoundingBox = new BoundingBoxE6(40.796788,
 			-73.949232, 40.768094, -73.981762);
-		sPaint = new SafePaint();
+		sPaint = new Paint();
 		sPaint.setColor(Color.argb(50, 255, 0, 0));
 	}
 	@Override
@@ -130,16 +132,32 @@ public class SampleLimitedScrollArea extends BaseSampleFragment {
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
-	class ShadeAreaOverlay extends SafeDrawOverlay {
+	class ShadeAreaOverlay extends Overlay {
 
+		final GeoPoint mTopLeft;
+		final GeoPoint mBottomRight;
+		final Point mTopLeftPoint = new Point();
+		final Point mBottomRightPoint = new Point();
 		public ShadeAreaOverlay(Context ctx) {
 			super(ctx);
+			mTopLeft = new GeoPoint(sCentralParkBoundingBox.getLatNorthE6(),
+					sCentralParkBoundingBox.getLonWestE6());
+			mBottomRight = new GeoPoint(sCentralParkBoundingBox.getLatSouthE6(),
+					sCentralParkBoundingBox.getLonEastE6());
 		}
 
 		@Override
-		protected void drawSafe(ISafeCanvas c, MapView osmv, boolean shadow) {
+		protected void draw(Canvas c, MapView osmv, boolean shadow) {
+			if (shadow)
+				return;
+
 			final Projection proj = osmv.getProjection();
-			Rect area = proj.toPixels(sCentralParkBoundingBox);
+
+			proj.toPixels(mTopLeft, mTopLeftPoint);
+			proj.toPixels(mBottomRight, mBottomRightPoint);
+
+			Rect area = new Rect(mTopLeftPoint.x, mTopLeftPoint.y, mBottomRightPoint.x,
+					mBottomRightPoint.y);
 			c.drawRect(area, sPaint);
 		}
 	}

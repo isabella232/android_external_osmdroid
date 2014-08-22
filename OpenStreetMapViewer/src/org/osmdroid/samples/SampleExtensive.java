@@ -7,7 +7,6 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.constants.OpenStreetMapConstants;
 import org.osmdroid.tileprovider.tilesource.ITileSource;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.tileprovider.util.CloudmadeUtil;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MinimapOverlay;
@@ -26,9 +25,9 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 /**
- * 
+ *
  * @author Nicolas Gramlich
- * 
+ *
  */
 public class SampleExtensive extends SampleMapActivity implements OpenStreetMapConstants {
 	// ===========================================================
@@ -65,8 +64,6 @@ public class SampleExtensive extends SampleMapActivity implements OpenStreetMapC
 
 		final RelativeLayout rl = new RelativeLayout(this);
 
-		CloudmadeUtil.retrieveCloudmadeKey(getApplicationContext());
-
 		this.mOsmv = new MapView(this, 256);
 		this.mOsmvController = this.mOsmv.getController();
 		rl.addView(this.mOsmv, new RelativeLayout.LayoutParams(LayoutParams.FILL_PARENT,
@@ -78,8 +75,9 @@ public class SampleExtensive extends SampleMapActivity implements OpenStreetMapC
 			this.mOsmv.getOverlays().add(mScaleBarOverlay);
 			// Scale bar tries to draw as 1-inch, so to put it in the top center, set x offset to
 			// half screen width, minus half an inch.
-			this.mScaleBarOverlay.setScaleBarOffset(getResources().getDisplayMetrics().widthPixels
-					/ 2 - getResources().getDisplayMetrics().xdpi / 2, 10);
+			this.mScaleBarOverlay.setScaleBarOffset(
+					(int) (getResources().getDisplayMetrics().widthPixels / 2 - getResources()
+							.getDisplayMetrics().xdpi / 2), 10);
 		}
 
 		/* SingleLocation-Overlay */
